@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Navbar from "../Navbar";
 
 const ExpenseForm = () => {
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [date, setDate] = useState("");
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    setExpenses(storedExpenses);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+  }, [expenses]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (title && amount && category && date) {
       const newExpense = {
+        id: Date.now(), 
         title,
         amount: parseFloat(amount),
         category,
         date,
       };
 
-      const existingExpenses =
-        JSON.parse(localStorage.getItem("expenses")) || [];
-
-      existingExpenses.push(newExpense);
-
-      localStorage.setItem("expenses", JSON.stringify(existingExpenses));
+      setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
 
       setTitle("");
       setAmount("");
@@ -35,7 +42,9 @@ const ExpenseForm = () => {
 
   return (
     <>
+    <Navbar />
       <h2>Expense Tracker App</h2>
+      <div className="expense-form">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -62,6 +71,7 @@ const ExpenseForm = () => {
         />
         <button type="submit">Add Expense</button>
       </form>
+      </div>
     </>
   );
 };

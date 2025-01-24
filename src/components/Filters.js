@@ -1,3 +1,4 @@
+import React from "react";
 const Filters = ({ setFilters }) => {
   const handleCategoryChange = (e) => {
     setFilters((prevFilters) => ({ ...prevFilters, category: e.target.value }));

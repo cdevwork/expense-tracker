@@ -27,6 +27,12 @@ h1 {
   margin-bottom: 2rem;
 }
 
+h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
 button {
   background-color: #007bff;
   color: #fff;
@@ -40,11 +46,6 @@ button {
 
 button:hover {
   background-color: #0056b3;
-}
-
-
-h2 {
-  text-align: center;
 }
 
 input,
@@ -63,9 +64,21 @@ select:focus {
   outline: none;
 }
 
+.expense-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 form {
-  margin-bottom: 2rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -73,9 +86,10 @@ form input[type="text"],
 form input[type="number"],
 form input[type="date"],
 form select {
+  width: 100%;
+  padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  padding: 0.6rem;
   font-size: 1rem;
 }
 
@@ -93,21 +107,6 @@ form button {
 
 form button:hover {
   background-color: #218838;
-}
-
-.filters {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.filters select,
-.filters input {
-  flex: 1;
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
 }
 
 ul {
@@ -145,6 +144,21 @@ li button:hover {
   background-color: #c82333;
 }
 
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters select,
+.filters input {
+  flex: 1;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
 .summary {
   margin-top: 2rem;
   font-size: 1.2rem;
@@ -156,26 +170,6 @@ li button:hover {
   color: #495057;
 }
 
-@media (max-width: 600px) {
-  .container {
-    padding: 1rem;
-  }
-
-  form {
-    gap: 0.5rem;
-  }
-
-  li {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .filters {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
 nav {
   background-color: #0c0b0b;
   padding: 10px;
@@ -188,9 +182,8 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  justify-content: end;
+  justify-content: flex-end;
 }
-  
 
 li:last-child {
   margin-right: 0;
@@ -212,6 +205,25 @@ a:hover {
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  form {
+    gap: 0.5rem;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
   ul {
     flex-direction: column;
     align-items: center;
@@ -226,4 +238,3 @@ a:hover {
     margin-bottom: 0;
   }
 }
-
