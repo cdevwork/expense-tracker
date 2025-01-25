@@ -1,0 +1,97 @@
+.view-expense-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .page-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .filter-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .category-select {
+    padding: 8px;
+    font-size: 1rem;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .table-c {
+    margin-bottom: 20px;
+    overflow-x: auto;
+    width: 50%;
+    margin: auto;
+
+  }
+  
+  .expenses-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+  }
+  
+  .expenses-table th,
+  .expenses-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+  
+  .expenses-table th {
+    background-color: #f1f1f1;
+    color: #555;
+  }
+  
+  .expenses-table td {
+    color: #333;
+  }
+  
+  .edit-btn,
+  .delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  .edit-btn {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .edit-btn:hover {
+    background-color: #45a049;
+  }
+  
+  .delete-btn:hover {
+    background-color: #e53935;
+  }
+  
+  .total-container {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+
+  .arup{
+    font-size: 20px;
+  }

@@ -6,25 +6,37 @@ const Navbar = () => {
 
   const handleLogout = () => {
     console.log("User logged out");
-
     navigate("/");
   };
 
   return (
     <nav>
-      <ul style={{ display: "flex", listStyle: "none", padding: 0, margin: 0 }}>
+      <ul
+        style={{
+          display: "flex",
+          listStyle: "none",
+          padding: 0,
+          margin: 0,
+        }}
+      >
         <li style={{ marginRight: "10px" }}>
           <Link
-            to="/ExpenseForm"
-            style={{ textDecoration: "none", color: "black" }}
+            to="/expenseform"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
           >
-            ExpenseForm
+            Add Expense
           </Link>
         </li>
         <li style={{ marginRight: "10px" }}>
           <Link
-            to="/expenses"
-            style={{ textDecoration: "none", color: "black" }}
+            to="/viewexpense"
+            style={{
+              textDecoration: "none",
+              color: "black",
+            }}
           >
             View Expense
           </Link>

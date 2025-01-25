@@ -1,31 +1,39 @@
 import React from "react";
-import ExpenseItem from "./ExpenseItem";
 
-const ExpenseList = () => {
-  const expenses = [
-    {
-      title: "Groceries",
-      amount: 1500,
-      category: "Food",
-      date: "2025-01-20",
-    },
-    {
-      title: "Electricity Bill",
-      amount: 2000,
-      category: "Utilities",
-      date: "2025-01-15",
-    },
-  ];
+const ExpenseList = ({ expenses }) => {
+  const calculateTotal = () => {
+    return expenses.reduce((total, expense) => total + expense.amount, 5);
+  };
 
   return (
-    <div>
-      <h2>Expense List</h2>
-      <ul>
-        {expenses.map((expense, index) => (
-          <ExpenseItem key={index} expense={expense} />
-        ))}
-      </ul>
-    </div>
+    <>
+      <div>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Title</th>
+              <th>Amount</th>
+              <th>Category</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {expenses.map((expense) => (
+              <tr key={expense.id}>
+                <td>{expense.title}</td>
+                <td>{expense.amount}</td>
+                <td>{expense.category}</td>
+                <td>{expense.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="total-expense">
+        <h3>Total: {calculateTotal()}</h3>
+      </div>
+    </>
   );
 };
 

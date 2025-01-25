@@ -1,128 +1,99 @@
 import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
+import "./ViewExpense.css"; 
+import { FaIndianRupeeSign } from "react-icons/fa6";
 
 const ViewExpense = () => {
-  const [title, setTitle] = useState("");
-  const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
-  const [date, setDate] = useState("");
   const [expenses, setExpenses] = useState([]);
-  const [filterCategory, setFilterCategory] = useState("");
-  const [filterDate, setFilterDate] = useState("");
-  const [editIndex, setEditIndex] = useState(null); 
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [editExpenseId, setEditExpenseId] = useState(null); 
+  const [updatedExpense, setUpdatedExpense] = useState({
+    title: "",
+    amount: "",
+    category: "",
+    date: "",
+  });
+
+  const categories = ["Food", "Travel", "Shopping"];
 
   useEffect(() => {
     const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
     setExpenses(storedExpenses);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-  }, [expenses]);
-
-  const handleAddOrUpdateExpense = () => {
-    if (!title || !amount || !category || !date) {
-      alert("Please fill all fields!");
-      return;
-    }
-
-    const newExpense = { title, amount: parseFloat(amount), category, date };
-
-    if (editIndex !== null) {
-      const updatedExpenses = [...expenses];
-      updatedExpenses[editIndex] = newExpense;
-      setExpenses(updatedExpenses);
-      setEditIndex(null);
-    } else {
-      setExpenses([...expenses, newExpense]);
-    }
-
-    setTitle("");
-    setAmount("");
-    setCategory("");
-    setDate("");
+  const calculateTotal = () => {
+    return expenses.reduce(
+      (total, expense) => total + parseFloat(expense.amount || 0),
+      0
+    );
   };
 
-  const handleEditExpense = (index) => {
-    const expenseToEdit = expenses[index];
-    setTitle(expenseToEdit.title);
-    setAmount(expenseToEdit.amount);
-    setCategory(expenseToEdit.category);
-    setDate(expenseToEdit.date);
-    setEditIndex(index);
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
   };
 
-  const handleDeleteExpense = (index) => {
-    const updatedExpenses = expenses.filter((_, i) => i !== index);
+  const handleDelete = (id) => {
+    const updatedExpenses = expenses.filter((expense) => expense.id !== id);
     setExpenses(updatedExpenses);
+    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
   };
 
-  const filteredExpenses = expenses.filter((expense) => {
-    const matchesCategory = filterCategory
-      ? expense.category.toLowerCase() === filterCategory.toLowerCase()
-      : true;
-    const matchesDate = filterDate ? expense.date === filterDate : true;
+  const handleEdit = (id) => {
+    const expenseToEdit = expenses.find((expense) => expense.id === id);
+    setEditExpenseId(id);
+    setUpdatedExpense({
+      title: expenseToEdit.title,
+      amount: expenseToEdit.amount,
+      category: expenseToEdit.category,
+      date: expenseToEdit.date,
+    });
+  };
 
-    return matchesCategory && matchesDate;
-  });
+  const handleSave = (id) => {
+    const updatedExpenses = expenses.map((expense) =>
+      expense.id === id ? { ...expense, ...updatedExpense } : expense
+    );
+    setExpenses(updatedExpenses);
+    localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+    setEditExpenseId(null); 
+  };
 
-  const totalExpense = filteredExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedExpense((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const filteredExpenses = selectedCategory
+    ? expenses.filter((expense) => expense.category === selectedCategory)
+    : expenses;
 
   return (
-    <div>
-      <h2>{editIndex !== null ? "Edit Expense" : "Add Expense"}</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <button onClick={handleAddOrUpdateExpense}>
-          {editIndex !== null ? "Update Expense" : "Add Expense"}
-        </button>
-      </div>
+    <>
+      <Navbar />
+      <div className="view-expense-container">
+        <h2 className="page-title">View Expenses</h2>
 
-      <h2>Filter Expenses</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Filter by Category"
-          value={filterCategory}
-          onChange={(e) => setFilterCategory(e.target.value)}
-        />
-        <input
-          type="date"
-          value={filterDate}
-          onChange={(e) => setFilterDate(e.target.value)}
-        />
-      </div>
+        <div className="filter-container">
+          <h3>Filter by Category</h3>
+          <select
+            onChange={handleCategoryChange}
+            value={selectedCategory}
+            className="category-select"
+          >
+            <option value="">All Categories</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <h2>Expense Summary</h2>
-      <p>
-        <strong>Total Expenses:</strong> ₹{totalExpense.toFixed(2)}
-      </p>
-
-      <h2>View Expenses</h2>
-      <div>
-        {filteredExpenses.length > 0 ? (
-          <table border="1" cellPadding="10" style={{ borderCollapse: "collapse" }}>
+        <div className="table-c">
+          <table className="expenses-table">
             <thead>
               <tr>
                 <th>Title</th>
@@ -133,25 +104,92 @@ const ViewExpense = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredExpenses.map((expense, index) => (
-                <tr key={index}>
-                  <td>{expense.title}</td>
-                  <td>₹{expense.amount.toFixed(2)}</td>
-                  <td>{expense.category}</td>
-                  <td>{expense.date}</td>
+              {filteredExpenses.map((expense) => (
+                <tr key={expense.id}>
                   <td>
-                    <button onClick={() => handleEditExpense(index)}>Edit</button>
-                    <button onClick={() => handleDeleteExpense(index)}>Delete</button>
+                    {editExpenseId === expense.id ? (
+                      <input
+                        type="text"
+                        name="title"
+                        value={updatedExpense.title}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      expense.title
+                    )}
+                  </td>
+                  <td>
+                    {editExpenseId === expense.id ? (
+                      <input
+                        type="number"
+                        name="amount"
+                        value={updatedExpense.amount}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      expense.amount
+                    )}
+                  </td>
+                  <td>
+                    {editExpenseId === expense.id ? (
+                      <select
+                        name="category"
+                        value={updatedExpense.category}
+                        onChange={handleChange}
+                      >
+                        {categories.map((category, index) => (
+                          <option key={index} value={category}>
+                            {category}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      expense.category
+                    )}
+                  </td>
+                  <td>
+                    {editExpenseId === expense.id ? (
+                      <input
+                        type="date"
+                        name="date"
+                        value={updatedExpense.date}
+                        onChange={handleChange}
+                      />
+                    ) : (
+                      expense.date
+                    )}
+                  </td>
+                  <td>
+                    {editExpenseId === expense.id ? (
+                      <button onClick={() => handleSave(expense.id)} className="save-btn">
+                        Save
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleEdit(expense.id)}
+                        className="edit-btn"
+                      >
+                        Edit
+                      </button>
+                    )}
+                    <button
+                      onClick={() => handleDelete(expense.id)}
+                      className="delete-btn"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        ) : (
-          <p>No matching expenses found.</p>
-        )}
+        </div>
+
+        <div className="total-container">
+          <h3>Total:<FaIndianRupeeSign className="arup" /> {calculateTotal().toFixed(2)}</h3>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

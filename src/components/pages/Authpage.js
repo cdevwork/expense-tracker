@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
-  const [isSignin, setIsSignin] = useState(true); 
+  const [isSignin, setIsSignin] = useState(true);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ const AuthPage = () => {
         if (userExists) {
           localStorage.setItem("loggedIn", "true");
           alert("Sign-In Successful!");
-          navigate("/ExpenseForm");
+          navigate("/expenseform");
         } else {
           alert("Invalid credentials!");
         }
@@ -63,39 +63,39 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="wer">
-      <h1>{isSignin ? "Sign-In" : "Sign-Up"}</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
-        />
-        {!isSignin && (
+    <div className="form-sign">
+      <div className="wer">
+        <h1>{isSignin ? "Sign-In" : "Sign-Up"}</h1>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username"
           />
-        )}
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button type="submit">{isSignin ? "Sign-In" : "Sign-Up"}</button>
-      </form>
-      <p>
-        {isSignin
-          ? "Don't have an account?"
-          : "Already have an account?"}{" "}
-        <button onClick={handleToggle}>
-          {isSignin ? "Sign-Up" : "Sign-In"}
-        </button>
-      </p>
+          {!isSignin && (
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+          )}
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <button type="submit">{isSignin ? "Sign-In" : "Sign-Up"}</button>
+        </form>
+        <p>
+          {isSignin ? "Don't have an account?" : "Already have an account?"}{" "}
+          <button onClick={handleToggle}>
+            {isSignin ? "Sign-Up" : "Sign-In"}
+          </button>
+        </p>
+      </div>
     </div>
   );
 };
