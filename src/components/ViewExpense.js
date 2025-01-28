@@ -13,6 +13,7 @@ const ViewExpense = () => {
     category: "",
     date: "",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = ["Food", "Travel", "Shopping"];
 
@@ -47,15 +48,17 @@ const ViewExpense = () => {
       category: expenseToEdit.category,
       date: expenseToEdit.date,
     });
+    setIsModalOpen(true);
   };
 
-  const handleSave = (id) => {
+  const handleSave = () => {
     const updatedExpenses = expenses.map((expense) =>
-      expense.id === id ? { ...expense, ...updatedExpense } : expense
+      expense.id === editExpenseId ? { ...expense, ...updatedExpense } : expense
     );
     setExpenses(updatedExpenses);
     localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
     setEditExpenseId(null);
+    setIsModalOpen(false);
   };
 
   const handleChange = (e) => {
@@ -64,6 +67,10 @@ const ViewExpense = () => {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const filteredExpenses = selectedCategory
@@ -106,75 +113,17 @@ const ViewExpense = () => {
             <tbody>
               {filteredExpenses.map((expense) => (
                 <tr key={expense.id}>
+                  <td>{expense.title}</td>
+                  <td>{expense.amount}</td>
+                  <td>{expense.category}</td>
+                  <td>{expense.date}</td>
                   <td>
-                    {editExpenseId === expense.id ? (
-                      <input
-                        type="text"
-                        name="title"
-                        value={updatedExpense.title}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      expense.title
-                    )}
-                  </td>
-                  <td>
-                    {editExpenseId === expense.id ? (
-                      <input
-                        type="number"
-                        name="amount"
-                        value={updatedExpense.amount}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      expense.amount
-                    )}
-                  </td>
-                  <td>
-                    {editExpenseId === expense.id ? (
-                      <select
-                        name="category"
-                        value={updatedExpense.category}
-                        onChange={handleChange}
-                      >
-                        {categories.map((category, index) => (
-                          <option key={index} value={category}>
-                            {category}
-                          </option>
-                        ))}
-                      </select>
-                    ) : (
-                      expense.category
-                    )}
-                  </td>
-                  <td>
-                    {editExpenseId === expense.id ? (
-                      <input
-                        type="date"
-                        name="date"
-                        value={updatedExpense.date}
-                        onChange={handleChange}
-                      />
-                    ) : (
-                      expense.date
-                    )}
-                  </td>
-                  <td>
-                    {editExpenseId === expense.id ? (
-                      <button
-                        onClick={() => handleSave(expense.id)}
-                        className="save-btn"
-                      >
-                        Save
-                      </button>
-                    ) : (
-                      <button
-                        onClick={() => handleEdit(expense.id)}
-                        className="edit-btn"
-                      >
-                        Edit
-                      </button>
-                    )}
+                    <button
+                      onClick={() => handleEdit(expense.id)}
+                      className="edit-btn"
+                    >
+                      Edit
+                    </button>
                     <button
                       onClick={() => handleDelete(expense.id)}
                       className="delete-btn"
@@ -195,6 +144,65 @@ const ViewExpense = () => {
           </h3>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Edit Expense</h3>
+            <form>
+              <label>
+                Title:
+                <input
+                  type="text"
+                  name="title"
+                  value={updatedExpense.title}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Amount:
+                <input
+                  type="number"
+                  name="amount"
+                  value={updatedExpense.amount}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Category:
+                <select
+                  name="category"
+                  value={updatedExpense.category}
+                  onChange={handleChange}
+                >
+                  {categories.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Date:
+                <input
+                  type="date"
+                  name="date"
+                  value={updatedExpense.date}
+                  onChange={handleChange}
+                />
+              </label>
+              <div className="modal-actions">
+                <button type="button" onClick={handleSave} className="save-btn">
+                  Save
+                </button>
+                <button type="button" onClick={closeModal} className="close-btn">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -1,97 +1,100 @@
 .view-expense-container {
-    margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-  
-  .page-title {
-    text-align: center;
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .filter-container {
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .category-select {
-    padding: 8px;
-    font-size: 1rem;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  
-  .table-c {
-    margin-bottom: 20px;
-    overflow-x: auto;
-    width: 50%;
-    margin: auto;
+  padding: 20px;
+}
 
-  }
-  
-  .expenses-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-  }
-  
-  .expenses-table th,
-  .expenses-table td {
-    padding: 12px;
-    text-align: center;
-    border: 1px solid #ccc;
-  }
-  
-  .expenses-table th {
-    background-color: #f1f1f1;
-    color: #555;
-  }
-  
-  .expenses-table td {
-    color: #333;
-  }
-  
-  .edit-btn,
-  .delete-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 5px;
-  }
-  
-  .edit-btn {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .delete-btn {
-    background-color: #f44336;
-    color: white;
-  }
-  
-  .edit-btn:hover {
-    background-color: #45a049;
-  }
-  
-  .delete-btn:hover {
-    background-color: #e53935;
-  }
-  
-  .total-container {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #333;
-    margin-top: 20px;
-    font-weight: bold;
-  }
-  
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
-  .arup{
-    font-size: 20px;
-  }
+.filter-container {
+  margin-bottom: 20px;
+}
+
+.category-select {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.table-c {
+  overflow-x: auto;
+}
+
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.expenses-table th,
+.expenses-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.edit-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.total-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-btn {
+  background-color: #dc3545;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

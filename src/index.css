@@ -61,6 +61,8 @@ h2 {
 }
 
 button {
+  background: rgb(52, 180, 137);
+  font-family: 'Courier New', Courier, monospace;
   border: none;
   padding: 10px 15px;
   border-radius: 15px;
@@ -68,11 +70,13 @@ button {
   margin: 10px 0px;
   font-size: 1rem;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  
 }
 
 button.edit-btn {
-  background: #110c64;
-  color: white;
+  background: #a8f392;
+  color: green;
+
 }
 
 button.edit-btn:hover {
@@ -81,7 +85,7 @@ button.edit-btn:hover {
 }
 
 button.delete-btn:hover {
-  background: #c5303c;
+  background: #9c343c;
   transform: scale(1.05);
 }
 
