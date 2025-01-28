@@ -30,11 +30,11 @@ const AuthPage = () => {
           (user) => user.email === email && user.password === password
         );
         if (userExists) {
-          localStorage.setItem("loggedIn", "true");
+          localStorage.setItem("loggedIn", "true"); 
           alert("Sign-In Successful!");
-          navigate("/expenseform");
+          navigate("/expenseform");  
         } else {
-          alert("Invalid credentials!");
+          alert("Invalid credentials!");  
         }
       } else {
         alert("Please fill in all fields.");
@@ -57,7 +57,7 @@ const AuthPage = () => {
         storedUsers.push({ username, email, password });
         localStorage.setItem("users", JSON.stringify(storedUsers));
         alert("Sign-Up Successful! Please Sign-In.");
-        setIsSignin(true);
+        setIsSignin(true);  
       }
     }
   };

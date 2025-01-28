@@ -49,7 +49,7 @@ const ExpenseForm = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar /> 
       <h2>Expense Tracker App</h2>
       <div className="expense-form">
         <form onSubmit={handleSubmit}>
@@ -79,6 +79,7 @@ const ExpenseForm = () => {
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
+          <div className="Add Expense"></div>
           <button type="submit">Add Expense</button>
         </form>
       </div>

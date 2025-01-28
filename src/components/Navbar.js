@@ -5,7 +5,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
+    localStorage.removeItem("loggedIn");  
+    localStorage.removeItem("users");  
     console.log("User logged out");
+
     navigate("/");
   };
 

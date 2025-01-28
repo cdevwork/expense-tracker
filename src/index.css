@@ -197,3 +197,6 @@ a:hover {
     transform: translateY(0);
   }
 }
+.Add Expense {
+  display: flex;
+}

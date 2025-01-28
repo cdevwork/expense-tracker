@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import "./ViewExpense.css"; 
+import "./ViewExpense.css";
 import { FaIndianRupeeSign } from "react-icons/fa6";
 
 const ViewExpense = () => {
   const [expenses, setExpenses] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [editExpenseId, setEditExpenseId] = useState(null); 
+  const [editExpenseId, setEditExpenseId] = useState(null);
   const [updatedExpense, setUpdatedExpense] = useState({
     title: "",
     amount: "",
@@ -55,7 +55,7 @@ const ViewExpense = () => {
     );
     setExpenses(updatedExpenses);
     localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
-    setEditExpenseId(null); 
+    setEditExpenseId(null);
   };
 
   const handleChange = (e) => {
@@ -161,7 +161,10 @@ const ViewExpense = () => {
                   </td>
                   <td>
                     {editExpenseId === expense.id ? (
-                      <button onClick={() => handleSave(expense.id)} className="save-btn">
+                      <button
+                        onClick={() => handleSave(expense.id)}
+                        className="save-btn"
+                      >
                         Save
                       </button>
                     ) : (
@@ -186,7 +189,10 @@ const ViewExpense = () => {
         </div>
 
         <div className="total-container">
-          <h3>Total:<FaIndianRupeeSign className="arup" /> {calculateTotal().toFixed(2)}</h3>
+          <h3>
+            Total:
+            <FaIndianRupeeSign className="arup" /> {calculateTotal().toFixed(2)}
+          </h3>
         </div>
       </div>
     </>
