@@ -1,48 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const ExpenseChart = () => {
-  const [chartData, setChartData] = useState([]);
-
-  useEffect(() => {
-    const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
-
-    const categoryTotals = storedExpenses.reduce((acc, expense) => {
-      acc[expense.category] = (acc[expense.category] || 0) + expense.amount;
-      return acc;
-    }, {});
-
-    const formattedData = Object.keys(categoryTotals).map((category) => ({
-      name: category,
-      value: categoryTotals[category],
-    }));
-
-    setChartData(formattedData);
-  }, []);
+  const data = [
+    { id: 0, value: 20, label: "Food" },
+    { id: 1, value: 15, label: "Shopping" },
+    { id: 2, value: 10, label: "Travel" },
+  ];
 
   return (
-    <div>
-      <h2>Expenses by Category</h2>
-      <PieChart width={400} height={400}>
-        <Pie
-          data={chartData}
-          cx={200}
-          cy={200}
-          labelLine={false}
-          outerRadius={120}
-          fill="#8884d8"
-          dataKey="value"
-          label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
-        >
-          {chartData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-      </PieChart>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ textAlign: "center" }}>
+        <h2>Expenses by Category</h2>
+        <PieChart width={400} height={400}>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="label"
+            cx="50%"
+            cy="50%"
+            outerRadius={150}
+            fill="#8884d8"
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </div>
     </div>
   );
 };

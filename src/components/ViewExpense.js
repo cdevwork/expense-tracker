@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import "./ViewExpense.css";
 import { FaIndianRupeeSign } from "react-icons/fa6";
-import ExpenseChart from "./Expenses/ExpenseChart";
+import ExpenseChart from "./Expenses/ExpenseChart"; 
 
 const ViewExpense = () => {
   const [expenses, setExpenses] = useState([]);
@@ -78,6 +78,16 @@ const ViewExpense = () => {
     ? expenses.filter((expense) => expense.category === selectedCategory)
     : expenses;
 
+  const chartData = expenses.reduce((acc, expense) => {
+    const existingCategory = acc.find((item) => item.name === expense.category);
+    if (existingCategory) {
+      existingCategory.value += parseFloat(expense.amount || 0);
+    } else {
+      acc.push({ name: expense.category, value: parseFloat(expense.amount || 0) });
+    }
+    return acc;
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -99,6 +109,8 @@ const ViewExpense = () => {
             ))}
           </select>
         </div>
+
+        <ExpenseChart data={chartData} /> 
 
         <div className="table-c">
           <table className="expenses-table">
