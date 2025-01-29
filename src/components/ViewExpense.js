@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import "./ViewExpense.css";
 import { FaIndianRupeeSign } from "react-icons/fa6";
+import ExpenseChart from "./Expenses/ExpenseChart";
 
 const ViewExpense = () => {
   const [expenses, setExpenses] = useState([]);
