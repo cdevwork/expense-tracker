@@ -61,8 +61,8 @@ h2 {
 }
 
 button {
-  background: rgb(52, 180, 137);
-  font-family: 'Courier New', Courier, monospace;
+  /* background: rgb(52, 180, 137);
+  font-family: 'Courier New', Courier, monospace; */
   border: none;
   padding: 10px 15px;
   border-radius: 15px;
@@ -80,7 +80,7 @@ button.edit-btn {
 }
 
 button.edit-btn:hover {
-  background: #524dc1;
+  background: #6865a5;
   transform: scale(1.05);
 }
 
@@ -113,7 +113,6 @@ form {
   border-radius: 5px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
   animation: fadeIn 1s ease;
-  box-shadow: 5px 5px 5px gray;
   justify-content: center;
 }
 
@@ -203,4 +202,23 @@ a:hover {
 }
 .Add Expense {
   display: flex;
+}
+.form-sign{
+  background-color:#f0f0f0 ;
+  width: 400px;
+  height: auto;
+  margin: auto;
+  padding: 20px;
+  margin-top: 50px;
+}
+.btn-a{
+  background-color: #ff9f45;
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.head-s{
+  color: #24C6DC;
+  font-size: 35px;
 }

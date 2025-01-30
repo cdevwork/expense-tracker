@@ -65,8 +65,8 @@ const AuthPage = () => {
   return (
     <div className="form-sign">
       <div className="wer">
-        <h1>{isSignin ? "Sign-In" : "Sign-Up"}</h1>
-        <form onSubmit={handleSubmit}>
+        <h1 className="head-s" >{isSignin ? "Sign-In" : "Sign-Up"}</h1>
+        <form className="form-h" onSubmit={handleSubmit}>
           <input
             type="text"
             value={username}
@@ -87,11 +87,11 @@ const AuthPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-          <button type="submit">{isSignin ? "Sign-In" : "Sign-Up"}</button>
+          <button className="btn-a" type="submit">{isSignin ? "Sign-In" : "Sign-Up"}</button>
         </form>
         <p>
           {isSignin ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button onClick={handleToggle}>
+          <button className="btn-a" onClick={handleToggle}>
             {isSignin ? "Sign-Up" : "Sign-In"}
           </button>
         </p>

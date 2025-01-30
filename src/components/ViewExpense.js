@@ -100,7 +100,9 @@ const ViewExpense = () => {
             onChange={handleCategoryChange}
             value={selectedCategory}
             className="category-select"
+
           >
+            {/* <div className="Categories"></div> */}
             <option value="">All Categories</option>
             {categories.map((category, index) => (
               <option key={index} value={category}>
